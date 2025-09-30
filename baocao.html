@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BÁO CÁO DỰ ÁN RADAR PHÁT HIỆN CHUYỂN ĐỘNG</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2c3e50;
+            --secondary: #3498db;
+            --accent: #e74c3c;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --text: #333;
+            --background: #f9f9f9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background-color: var(--background);
+            background-image: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            text-align: center;
+            border-left: 5px solid var(--secondary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--secondary), var(--accent));
+        }
+
+        .mark {
+            background-color: #ffeb3b;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .content {
+            background: white;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            color: var(--primary);
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 1.6em;
+            margin: 30px 0 15px 0;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--light);
+            position: relative;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100px;
+            height: 2px;
+            background: var(--secondary);
+        }
+
+        h3 {
+            color: var(--primary);
+            font-size: 1.3em;
+            margin: 25px 0 10px 0;
+        }
+
+        p {
+            margin-bottom: 15px;
+            text-align: justify;
+        }
+
+        ul, ol {
+            margin: 15px 0;
+            padding-left: 30px;
+        }
+
+        li {
+            margin-bottom: 8px;
+            text-align: justify;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--secondary);
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .download-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .authors {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .author {
+            background: var(--light);
+            padding: 15px 25px;
+            border-radius: 10px;
+            border-left: 4px solid var(--secondary);
+            font-weight: bold;
+            font-size: 1.1em;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .image-gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .image-item {
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .image-item:hover {
+            transform: translateY(-5px);
+        }
+
+        .image-item img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border: 1px solid #ddd;
+        }
+
+        .image-caption {
+            margin-top: 10px;
+            font-style: italic;
+            color: #666;
+            font-size: 0.9em;
+        }
+
+        .formula {
+            background: var(--light);
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            text-align: center;
+            border-left: 4px solid var(--secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        .underline {
+            text-decoration: underline;
+            font-weight: bold;
+            color: var(--accent);
+        }
+
+        .audio-section {
+            text-align: center;
+            margin: 20px 0;
+            padding: 15px;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .audio-player {
+            width: 100%;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .section-icon {
+            margin-right: 10px;
+            color: var(--secondary);
+        }
+
+        .conclusion {
+            background: var(--light);
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 4px solid var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            h2 {
+                font-size: 1.4em;
+            }
+            
+            .authors {
+                gap: 15px;
+            }
+            
+            .author {
+                padding: 10px 15px;
+                font-size: 1em;
+            }
+            
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            h2 {
+                font-size: 1.2em;
+            }
+            
+            .content {
+                padding: 15px;
+            }
+            
+            .authors {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1><span class="mark">BÁO CÁO DỰ ÁN KHOA HỌC KỸ THUẬT</span></h1>
+            <h2>ĐỀ TÀI: RADAR PHÁT HIỆN CHUYỂN ĐỘNG</h2>
+            
+            <div class="authors">
+                <div class="author">Phạm Thành Phúc</div>
+                <div class="author">Huỳnh Hữu Huy</div>
+            </div>
+            
+            <div class="audio-section">
+                <h3><i class="fas fa-headphones section-icon"></i>Nghe báo cáo</h3>
+                <audio controls class="audio-player">
+                    <source src="https://h.top4top.io/m_3560a5d5g1.mp3" type="audio/mpeg">
+                    Trình duyệt của bạn không hỗ trợ phát audio.
+                </audio>
+                <p><small>Nhấn nút play để nghe báo cáo thay vì đọc</small></p>
+            </div>
+            
+            <div class="download-section">
+                <a href="BÁO CÁO DỰ ÁN RADAR PHÁT HIỆN CHUYỂN ĐỘNG.docx" download class="download-btn">
+                    <i class="fas fa-download"></i> TẢI FILE BÁO CÁO (.DOCX)
+                </a>
+            </div>
+        </div>
+
+        <div class="content">
+            <h2><i class="fas fa-lightbulb section-icon"></i>I. Lí do chọn đề tài</h2>
+            <p>Radar được ứng dụng rộng rãi trong nhiều lĩnh vực như hàng không, hàng hải, giao thông, quân sự và an ninh. Nhờ radar, con người có thể phát hiện vật thể, tạo bản đồ địa hình và nâng cao an toàn. Từ thực tế đó, nhóm chọn đề tài <strong>"Radar phát hiện chuyển động"</strong> để tìm hiểu nguyên lý hoạt động và chế tạo mô hình thu nhỏ có thể ứng dụng trong cảnh báo an ninh và robot tự hành.</p>
+
+            <h2><i class="fas fa-bullseye section-icon"></i>II. Mục tiêu của đề tài</h2>
+            <p>Mục tiêu của đề tài không chỉ dừng lại ở việc chế tạo một mô hình radar mini sử dụng cảm biến siêu âm <strong>SRF05</strong> kết hợp với vi điều khiển <strong>ESP32</strong>, có khả năng phát hiện vật thể và chuyển động trong phạm vi 1 - 5 mét với chi phí thấp và linh kiện dễ tìm. Quan trọng hơn, sản phẩm được xây dựng nhằm phục vụ nhiều hướng khác nhau:</p>
+            
+            <ol>
+                <li><strong>Học tập và khám phá:</strong> Giúp mọi người có cái nhìn mới mẻ hơn về công nghệ radar, hiểu rõ nguyên lý hoạt động của sóng siêu âm, đồng thời rèn luyện tư duy logic, sáng tạo, lắp ráp và lập trình.</li>
+                
+                <li><strong>Ứng dụng thực tiễn:</strong> Có thể vận dụng trong nhiều tình huống như cảnh báo an ninh, hỗ trợ robot tự hành, điều khiển thiết bị thông minh hay giám sát môi trường.</li>
+                
+                <li><strong>Khơi gợi sáng tạo công nghệ:</strong> Là nền tảng để nghiên cứu nâng cao như radar đo tốc độ, radar giám sát sức khỏe hoặc radar dùng trong giao thông thông minh.</li>
+                
+                <li><strong>Ý nghĩa xã hội - giáo dục:</strong> Góp phần nâng cao nhận thức về công nghệ trong đời sống, đồng thời khuyến khích tinh thần tự học, đam mê khám phá và khả năng ứng dụng khoa học.</li>
+            </ol>
+            
+            <p>Thông qua đó, sản phẩm không chỉ dừng ở mô hình minh họa khoa học, mà còn mở ra định hướng phát triển trong tương lai, như tích hợp trí tuệ nhân tạo, kết nối IoT để giám sát từ xa, hay trở thành một phần trong hệ thống nhà thông minh, robot tự hành và an ninh hiện đại.</p>
+
+            <h2><i class="fas fa-cogs section-icon"></i>III. Nguyên lí hoạt động</h2>
+            <p>Mô hình radar siêu âm được xây dựng dựa trên nguyên lý rất quen thuộc trong đời sống: <strong>tiếng vang</strong>. Khi ta hét lớn trong một hang động hay trước vách núi, sau một thoáng ta sẽ nghe lại giọng của chính mình vọng về. Đó chính là hiện tượng âm thanh dội lại khi gặp vật cản. Radar siêu âm SRF05 hoạt động cũng tương tự như vậy, chỉ khác ở chỗ nó phát ra những sóng siêu âm mà tai người không nghe thấy.</p>
+
+            <h3>Quy trình hoạt động cụ thể như sau:</h3>
+            
+            <ol>
+                <li>
+                    <strong>Phát sóng:</strong> Cảm biến <strong>SRF05</strong> phát ra sóng siêu âm ở tần số khoảng 40 kHz - cao hơn rất nhiều so với âm thanh mà con người có thể nghe được.
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="https://f.top4top.io/p_3560ig14v1.png" alt="Cảm biến SRF05">
+                            <div class="image-caption">Hình ảnh cảm biến SRF05</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li><strong>Nhận sóng phản xạ:</strong> Khi sóng gặp vật thể trên đường đi, nó sẽ dội ngược trở lại và được bộ thu của cảm biến ghi nhận.</li>
+                
+                <li>
+                    <strong>Đo thời gian truyền sóng:</strong> Vi điều khiển <strong>ESP32</strong> tính toán khoảng thời gian từ lúc phát sóng đến khi nhận lại sóng phản xạ.
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="https://l.top4top.io/p_3560od1h31.png" alt="Vi điều khiển ESP32">
+                            <div class="image-caption">Hình ảnh vi điều khiển ESP32</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>Tính khoảng cách:</strong> Vì sóng siêu âm phải đi cả hai chiều (từ cảm biến đến vật thể rồi từ vật thể trở về), khoảng cách được tính theo công thức:
+                    <div class="formula">
+                        <strong>d = (t × v) / 2</strong>
+                    </div>
+                    <p><strong>Trong đó:</strong></p>
+                    <ul>
+                        <li><strong>d</strong>: khoảng cách từ cảm biến đến vật thể</li>
+                        <li><strong>t</strong>: thời gian sóng truyền đi - về</li>
+                        <li><strong>v</strong>: vận tốc âm thanh trong không khí, xấp xỉ 340 m/s</li>
+                    </ul>
+                    <p><strong>Ví dụ minh họa:</strong> Nếu thời gian sóng đi - về là 0.01 giây, quãng đường sóng đã đi được là 3.4m. Nhưng đó là quãng đường cả đi và về, nên khoảng cách thật đến vật thể chỉ là một nửa, tức khoảng 1.7m.</p>
+                </li>
+                
+                <li><strong>Phát hiện chuyển động:</strong> Nếu khoảng cách đo được thay đổi liên tục trong nhiều lần quét, hệ thống xác định rằng vật thể đang di chuyển.</li>
+                
+                <li><strong>Cảnh báo:</strong> Ngay khi phát hiện chuyển động, <strong>ESP32</strong> sẽ xử lý tín hiệu và đưa ra cảnh báo bằng đèn LED hoặc còi báo động.</li>
+            </ol>
+
+            <div class="highlight">
+                <p>Điểm thú vị ở mô hình radar siêu âm là nó <strong>không phụ thuộc vào ánh sáng</strong>. Nghĩa là dù trong bóng tối hoàn toàn hay khi có ánh sáng chói gắt, thiết bị vẫn hoạt động bình thường. Đặc biệt, nó cũng ít bị ảnh hưởng bởi các yếu tố như bụi, khói hay môi trường xung quanh.</p>
+            </div>
+
+            <p>Chính nhờ nguyên lý đơn giản nhưng hiệu quả này, radar siêu âm <strong>SRF05</strong> kết hợp với <strong>ESP32</strong> đã trở thành một giải pháp nhỏ gọn, dễ chế tạo nhưng lại đem đến nhiều ứng dụng thực tế: từ báo động an ninh, hỗ trợ robot tự hành, cho đến làm mô hình minh họa khoa học trực quan, dễ thu hút người xem.</p>
+
+            <h2><i class="fas fa-flask section-icon"></i>IV. Nội dung nghiên cứu</h2>
+            
+            <ol>
+                <li>
+                    <strong>Ý tưởng thực hiện:</strong> Radar trong thực tế thường phức tạp và đắt đỏ. Đề tài này đơn giản hóa nguyên lý bằng cách sử dụng <strong>sóng siêu âm</strong>, giống như loài dơi định vị trong bóng tối. Cảm biến được gắn trên <strong>động cơ bước 28BYJ-48</strong>, điều khiển bởi mạch <strong>ULN2003</strong>, cho phép quét không gian nhiều góc, tái hiện trực quan cơ chế radar thật.
+                    <div class="image-gallery">
+                        <div class="image-item">
+                            <img src="https://f.top4top.io/p_3560dt3ty1.png" alt="Động cơ bước 28BYJ-48 và mạch ULN2003">
+                            <div class="image-caption">Hình ảnh động cơ bước 28BYJ-48 và mạch ULN2003</div>
+                        </div>
+                    </div>
+                </li>
+                
+                <li>
+                    <strong>Linh kiện và chi phí:</strong>
+                    <ul>
+                        <li>Cảm biến <strong>SRF05</strong>: phát - thu sóng siêu âm để xác định khoảng cách.</li>
+                        <li>Vi điều khiển <strong>ESP32</strong>: xử lý dữ liệu, điều khiển động cơ và phát tín hiệu cảnh báo.</li>
+                        <li><strong>Động cơ bước 28BYJ-48 + ULN2003</strong>: xoay cảm biến theo từng góc nhỏ để quét không gian.</li>
+                        <li>Phụ kiện: đèn LED, còi báo động, dây nối, bo mạch phụ trợ.</li>
+                    </ul>
+                    <p class="underline">Tổng chi phí khoảng 300.000 đồng</p>, vừa tiết kiệm vừa đảm bảo đầy đủ chức năng.
+                </li>
+                
+                <li><strong>Mô hình radar mini:</strong> Cảm biến phát sóng siêu âm, nhận lại tín hiệu phản xạ từ vật thể và gửi dữ liệu về ESP32. Vi điều khiển xử lý thông tin, tính khoảng cách. Khi cảm biến được xoay nhờ động cơ bước, toàn bộ không gian phía trước được quét và hiển thị dữ liệu như một radar thu nhỏ.</li>
+                
+                <li><strong>Chức năng cảnh báo:</strong> Khi phát hiện có vật thể chuyển động, hệ thống đưa ra cảnh báo bằng <strong>đèn LED</strong> hoặc <strong>còi báo động</strong>. Cách thể hiện này trực quan, dễ quan sát, tạo cảm giác sinh động thay vì chỉ là con số khô khan.</li>
+                
+                <li><strong>Thử nghiệm và hướng ứng dụng:</strong> Mô hình được thử trong phạm vi 1-5 mét, cả trong điều kiện sáng, tối hoặc có bụi, kết quả đều ổn định.<br>Trong tương lai, hệ thống có thể phát triển thành <strong>báo động an ninh giá rẻ</strong>, <strong>robot tự hành tránh vật cản</strong>, hoặc <strong>thiết bị giám sát thông minh trong gia đình</strong>.</li>
+            </ol>
+
+            <h2><i class="fas fa-flag-checkered section-icon"></i>V. Kết luận</h2>
+            <div class="conclusion">
+                <p>Đề tài "Radar phát hiện chuyển động" đã mô phỏng thành công nguyên lý hoạt động của radar bằng cảm biến siêu âm SRF05 kết hợp với vi điều khiển ESP32 và động cơ bước. Mô hình tuy đơn giản, chi phí thấp nhưng vẫn đảm bảo đầy đủ các chức năng: quét không gian, đo khoảng cách và cảnh báo khi phát hiện vật thể di chuyển.</p>
+            </div>
+
+            <h3>Những điểm nổi bật đạt được:</h3>
+            <ol>
+                <li><strong>Ý nghĩa học tập:</strong> Giúp hiểu rõ hơn về kiến thức liên ngành STEM, rèn luyện kỹ năng lắp ráp, lập trình và tư duy sáng tạo.</li>
+                <li><strong>Tính thực tiễn:</strong> Có thể ứng dụng trong hệ thống báo động an ninh, robot tự hành hoặc thiết bị giám sát thông minh.</li>
+                <li><strong>Giá trị khoa học:</strong> Minh họa trực quan nguyên lý radar bằng sóng siêu âm, dễ tiếp cận, phù hợp để giảng dạy và nghiên cứu.</li>
+                <li><strong>Khả năng phát triển:</strong> Mô hình có thể mở rộng bằng cách tích hợp trí tuệ nhân tạo, kết nối IoT hoặc kết hợp cảm biến nâng cao để tăng độ chính xác.</li>
+            </ol>
+
+            <p>Nhờ vậy, sản phẩm không chỉ dừng lại ở một mô hình minh họa đơn giản, mà còn mở ra hướng phát triển công nghệ hiện đại, gần gũi và hữu ích trong đời sống.</p>
+        </div>
+    </div>
+
+    <script>
+        // Thêm hiệu ứng scroll mượt mà
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Thêm hiệu ứng fade-in khi cuộn trang
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Áp dụng hiệu ứng cho các phần tử
+        document.querySelectorAll('.content section, .image-item, .formula, .highlight').forEach(el => {
+            el.style.opacity = 0;
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>
